@@ -18,12 +18,14 @@ def create_app(script_info=None):
     app_settings = os.getenv('APP_SETTINGS')
     app.config.from_object(app_settings)
 
-    # setup extensions
+    # set up extensions
     db.init_app(app)
 
     # register blueprints
     from src.api.ping import ping_blueprint
     app.register_blueprint(ping_blueprint)
+    from src.api.users import users_blueprint
+    app.register_blueprint(users_blueprint)
 
     # shell context for flask cli
     @app.shell_context_processor

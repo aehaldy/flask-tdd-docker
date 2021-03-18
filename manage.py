@@ -1,7 +1,10 @@
 # manage.py
 
+
 import sys
+
 from flask.cli import FlaskGroup
+
 from src import create_app, db
 from src.api.models import User
 
