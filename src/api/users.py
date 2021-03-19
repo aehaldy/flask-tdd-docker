@@ -39,4 +39,14 @@ class UserList(Resource):
         return response_object, 201
 
 
+class Users(Resource):
+    @api.marshal_with(user)
+    def get(self, user_id):
+        userData = User.query.filter_by(id=user_id).first()
+        if not userData:
+            api.abort(404, f"User {user_id} does not exist")
+        return userData, 200
+
+
 api.add_resource(UserList, '/users')
+api.add_resource(Users, '/users/<int:user_id>')
